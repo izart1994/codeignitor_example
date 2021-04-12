@@ -192,6 +192,12 @@
               </li>
             </ul>
           </li>
+					<li class="nav-item">
+            <a href="<?php echo base_url().'mahasiswa/index'; ?>" class="nav-link <?php if($this->uri->uri_string() == 'mahasiswa/index') { echo 'active'; } ?>">
+							<i class="fas fa-user-friends  nav-icon"></i>
+              <p>Mahasiswa</p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="<?php echo base_url().'dashboard/widgets'; ?>" class="nav-link <?php if($this->uri->uri_string() == 'dashboard/widgets') { echo 'active'; } ?>">
               <i class="nav-icon fas fa-th"></i>
