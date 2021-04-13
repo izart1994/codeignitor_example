@@ -19,12 +19,29 @@ class Mahasiswa extends CI_Controller {
 		$ic 			= $this->input->post('mahasiswa_ic');
 		$tarikh_lahir 	= $this->input->post('mahasiswa_tarikh_lahir');
 		$desc 			= $this->input->post('mahasiswa_desc');
+		$tel 			= $this->input->post('mahasiswa_tel');
+		$pic 			= $_FILES['mahasiswa_pic'];
+		if($pic=''){
+		}else{
+			$config['upload_path']		= './assets/gambar';
+			$config['allowed_types']	= 'jpg|png|gif';
+
+			$this->load->library('upload', $config);
+			if(!$this->upload->do_upload('mahasiswa_pic')){
+				echo "Gagal Upload";
+				die();
+			}else{
+				$pic = $this->upload->data('file_name');
+			}
+		}
 
 		$data = array(
 			'mahasiswa_nama'			=> $nama,
 			'mahasiswa_ic'				=> $ic,
 			'mahasiswa_tarikh_lahir'	=> $tarikh_lahir,
-			'mahasiswa_desc'			=> $desc
+			'mahasiswa_desc'			=> $desc,
+			'mahasiswa_tel'				=> $tel,
+			'mahasiswa_pic'				=> $pic
 		);
 
 		$this->db_mahasiswa->insert_data($data, 'mahasiswa');
@@ -56,16 +73,44 @@ class Mahasiswa extends CI_Controller {
 		$ic 			= $this->input->post('mahasiswa_ic');
 		$tarikh_lahir 	= $this->input->post('mahasiswa_tarikh_lahir');
 		$desc 			= $this->input->post('mahasiswa_desc');
+		$tel 			= $this->input->post('mahasiswa_tel');
+		$pic 			= $_FILES['mahasiswa_pic'];
+		if($pic=''){
+		}else{
+			$config['upload_path']		= './assets/gambar';
+			$config['allowed_types']	= 'jpg|png|gif';
+
+			$this->load->library('upload', $config);
+			if(!$this->upload->do_upload('mahasiswa_pic')){
+				echo "Gagal Upload";
+				die();
+			}else{
+				$pic = $this->upload->data('file_name');
+			}
+		}
 
 		$data = array(
 			'mahasiswa_nama'			=> $nama,
 			'mahasiswa_ic'				=> $ic,
 			'mahasiswa_tarikh_lahir'	=> $tarikh_lahir,
-			'mahasiswa_desc'			=> $desc
+			'mahasiswa_desc'			=> $desc,
+			'mahasiswa_tel'				=> $tel,
+			'mahasiswa_pic'				=> $pic
 		);
 
 		$where = array('id_mahasiswa' => $id);
 		$this->db_mahasiswa->update_data($where, $data, 'mahasiswa');
 		redirect('mahasiswa/index');
+	}
+
+	public function detail($id)
+	{
+		$where = array('id_mahasiswa' => $id);
+		$data['mahasiswa'] = $this->db_mahasiswa->detail_data($where, 'mahasiswa');
+
+		$this->load->view('layout/header');
+		$this->load->view('layout/navbar');
+		$this->load->view('mahasiswa/detail', $data);
+		$this->load->view('layout/footer');
 	}
 }

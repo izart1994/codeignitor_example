@@ -21,5 +21,9 @@
 			$this->db->where($where);
 			$this->db->update($table,$data);
 		}
+
+		public function detail_data($where,$table){
+			return $this->db->get_where($table, $where)->row();
+		}
 	}
 ?>

@@ -32,6 +32,7 @@ class Login extends CI_Controller {
 				redirect('login/index');
 			}
 		} else {
+			$this->session->set_flashdata('message', 'Please insert matching inputs');
 			$this->index();
 		}
 	}

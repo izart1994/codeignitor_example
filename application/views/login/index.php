@@ -28,7 +28,11 @@
 			<div class="card">
 				<div class="card-body login-card-body">
 				<p class="login-box-msg">Sign in to start your session</p>
-
+				<?php
+					if($this->session->flashdata('message')){
+						echo "<div class='alert alert-danger'>".$this->session->flashdata('message')."</div>";
+					}
+				?>
 				<form action="<?php echo base_url().'login/validation'; ?>" method="post">
 					<div class="input-group">
 						<input type="email" name="email" class="form-control" placeholder="Email" value="<?php echo set_value('email'); ?>">

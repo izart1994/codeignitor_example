@@ -29,7 +29,7 @@
 						<td>Nama</td>
 						<td>No IC</td>
 						<td>Tarikh Lahir</td>
- 						<td colspan="2" align="center" style="width: 10%;">TIndakan</td>
+ 						<td colspan="3" align="center" style="width: 12%;">TIndakan</td>
 					</tr>
 				</thead>
 				<tbody>
@@ -41,8 +41,9 @@
 						<td><?php echo $mhsiswa->mahasiswa_nama; ?></td>
 						<td><?php echo $mhsiswa->mahasiswa_ic; ?></td>
 						<td><?php echo $mhsiswa->mahasiswa_tarikh_lahir; ?></td>
-						<td align="center" onclick="javascript: return confirm('Confirm untuk menghapus data?');"><?php echo anchor('mahasiswa/padam/'.$mhsiswa->id_mahasiswa, "<button class='btn btn-danger btn-sm'><i class='fa fa-trash'></i></button>");?></td>
+						<td align="center"><?php echo anchor('mahasiswa/detail/'.$mhsiswa->id_mahasiswa, "<button class='btn btn-success btn-sm'><i class='fa fa-search-plus'></i></button>");?></td>
 						<td align="center"><?php echo anchor('mahasiswa/edit/'.$mhsiswa->id_mahasiswa, "<button class='btn btn-primary btn-sm'><i class='fa fa-edit'></i></button>");?></td>
+						<td align="center" onclick="javascript: return confirm('Confirm untuk menghapus data?');"><?php echo anchor('mahasiswa/padam/'.$mhsiswa->id_mahasiswa, "<button class='btn btn-danger btn-sm'><i class='fa fa-trash'></i></button>");?></td>
 					</tr>
 					<?php endforeach; ?>
 				</tbody>
@@ -62,7 +63,7 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form action="<?php echo base_url().'mahasiswa/tambah'; ?>" method="POST">
+					<?php echo form_open_multipart('mahasiswa/tambah');?>
 						<div class="form_group">
 							<label for="mahasiswa_nama">Nama Mahasiswa</label>
 							<input type="text" name="mahasiswa_nama" id="mahasiswa_nama" class="form-control">
@@ -79,12 +80,20 @@
 							<label for="mahasiswa_desc">Deskripsi Mahasiswa</label>
 							<input type="text" name="mahasiswa_desc" id="mahasiswa_desc" class="form-control">
 						</div>
+						<div class="form_group">
+							<label for="mahasiswa_tel">No Telefon Mahasiswa</label>
+							<input type="text" name="mahasiswa_tel" id="mahasiswa_tel" class="form-control">
+						</div>
+						<div class="form_group">
+							<label for="mahasiswa_pic">Gambar Mahasiswa</label>
+							<input type="file" name="mahasiswa_pic" id="mahasiswa_pic" class="form-control">
+						</div>
 						<div class="modal-footer">
 							<button type="reset" class="btn btn-danger" value="Reset">Reset</button>
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
 							<button type="submit" class="btn btn-primary">Simpan</button>
 						</div>
-					</form>
+					<?php echo form_close();?>
 				</div>
 			</div>
 		</div>
