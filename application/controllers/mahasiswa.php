@@ -113,4 +113,17 @@ class Mahasiswa extends CI_Controller {
 		$this->load->view('mahasiswa/detail', $data);
 		$this->load->view('layout/footer');
 	}
+
+	public function print(){
+		$data['mahasiswa'] = $this->db_mahasiswa->get_data()->result();
+		$this->load->view('mahasiswa/print', $data);
+	}
+
+	public function pdf(){
+		$this->load->helper('pdf_helper');
+
+		$data['mahasiswa'] = $this->db_mahasiswa->get_data()->result();
+		
+		$this->load->view('mahasiswa/pdf', $data);
+	}
 }
